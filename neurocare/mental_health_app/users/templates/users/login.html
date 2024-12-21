@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCare+ - Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/styleSignUp.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome Back to NeuroCare+</h1>
+            <center><h3>Your Partner in Health and Wellbeing</h3></center>
+        </header>
+        <section class="form-section">
+            <h2>Login to Your Account</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-fields">
+                    {{ form.non_field_errors | safe }}
+                    <div>
+                        {{ form.username.errors | safe }}
+                        <label for="username" class="sr-only">Username</label><br>
+                        {{ form.username }}
+                    </div>
+                    <br>
+                    <div>
+                        {{ form.password.errors | safe }}
+                        <label for="password" class="sr-only">Password</label><br>
+                        {{ form.password }}
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn-signup">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+            </p>
+        </section>
+    </div>
+</body>
+</html>

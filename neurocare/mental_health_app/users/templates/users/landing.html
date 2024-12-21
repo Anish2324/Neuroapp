@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCare+ - Welcome</title>
+    {% load static %}
+
+    <style>
+        /* General Styling */   
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #001f3f; /* Dark blue background */
+    color: #ffffff; /* White text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    background: #003366; /* Slightly lighter blue for contrast */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    animation: slideDown 1s ease-out;
+}
+
+/* Logo */
+.logo {
+    margin-bottom: 20px;
+}
+
+/* Content */
+.content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    animation: textGlow 1.5s infinite alternate;
+}
+
+.content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #d1d1e0; /* Softer white */
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn.signup {
+    background-color: #007bff;
+}
+
+.btn.signup:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.btn.login {
+    background-color: #28a745;
+}
+
+.btn.login:hover {
+    background-color: #1e7e34;
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px #007bff, 0 0 20px #007bff;
+    }
+    to {
+        text-shadow: 0 0 20px #0056b3, 0 0 40px #0056b3;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content h1 {
+        font-size: 28px;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Logo -->
+        <img src="{% static '/users/images/finallogo.ico' %}" alt="NeuroCare+ Logo" class="logo" width="100">
+        
+        <!-- Content -->
+        <div class="content">
+            <h1>Welcome to NeuroCare+</h1>
+            <p>Your journey to improved mental well-being starts here!</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <a href="{% url 'signup' %}" class="btn signup">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn login">Login</a>
+        </div>
+    </div>
+</body>
+</html>

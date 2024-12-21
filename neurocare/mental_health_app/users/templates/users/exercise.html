@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCare+ - Initial Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #4A90E2;
+        }
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        button {
+            padding: 12px;
+            background-color: #4A90E2;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to NeuroCare+</h1>
+        <p>Please complete the following exercise to help us understand your mental health:</p>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Questions -->
+            <div class="question">
+                <label for="stress_level">How often do you feel overwhelmed by your responsibilities?</label>
+                <select name="stress_level" id="stress_level">
+                    <option value="low">Rarely</option>
+                    <option value="medium">Sometimes</option>
+                    <option value="high">Often</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="focus_difficulty">Do you find it hard to focus on tasks?</label>
+                <select name="focus_difficulty" id="focus_difficulty">
+                    <option value="low">No</option>
+                    <option value="medium">Occasionally</option>
+                    <option value="high">Yes</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="anxiety_level">Do you feel nervous or anxious frequently?</label>
+                <select name="anxiety_level" id="anxiety_level">
+                    <option value="low">Rarely</option>
+                    <option value="medium">Sometimes</option>
+                    <option value="high">Often</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="interest_loss">Do you feel a lack of interest in activities you used to enjoy?</label>
+                <select name="interest_loss" id="interest_loss">
+                    <option value="low">Rarely</option>
+                    <option value="medium">Sometimes</option>
+                    <option value="high">Often</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="sleep_disturbance">Do you experience difficulty sleeping or staying asleep?</label>
+                <select name="sleep_disturbance" id="sleep_disturbance">
+                    <option value="low">Rarely</option>
+                    <option value="medium">Sometimes</option>
+                    <option value="high">Often</option>
+                </select>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
