@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCare+ - Sign Up</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/styleSignUp.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sign Up for NeuroCare+</h1>
+           <center><h3>For Better Health and Wellbeing</h3></center>
+        </header>
+        <section class="form-section">
+            <h2>Create Your Account</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-fields">
+                    <!-- Existing Form Fields -->
+                    {{ form.as_p }}
+
+                    <!-- Age Field -->
+                     <center>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="1" max="120" required placeholder="Enter your age">
+                    </div>
+                    <br>
+
+                    <!-- Gender Field -->
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </center>
+                </div>
+                <button type="submit" class="btn-signup">Sign Up</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
