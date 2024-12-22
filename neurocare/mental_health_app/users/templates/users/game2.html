@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>NeuroCare+ - Add Coins</title>
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game 1</title>
     {% load static %}
     <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
     <style>
@@ -36,7 +37,7 @@
             font-size: 1em;
             border: none;
             border-radius: 5px;
-            background-color: red;
+            background-color: green;
             color: black;
             cursor: pointer;
         }
@@ -123,12 +124,10 @@
 <body>
     <h1>Earn Coins</h1>
     <p>Current Coins: {{ profile.coins }}</p>
-    <form method="post">
+    <h2>Click to Play the Game</h2>
+    <form id="coinForm" method="post">
         {% csrf_token %}
-        <h2>Click to Play the Game</h2>
-        <button type="submit">
-             <a href="" target="_blank" class="play">Play the Game</a>
-        </button>
+        <button type="button" onclick="submitFormAndRedirect()" >Play the Game</button>
     </form>
     <br>
     <a href="{% url 'dashboard' %}">Back to Dashboard</a>
@@ -151,8 +150,30 @@
             });
         }
 
-        // Create coins at regular intervals
-        setInterval(createCoin, 500); // Create a new coin every 500ms
+        // Create coins at intervals
+        setInterval(createCoin, 1000);
+
+        function submitFormAndRedirect() {
+            const form = document.getElementById('coinForm');
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = 'https://poki.com/en/g/maze-path-of-light';
+                } else {
+                    alert('Failed to add coins');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add coins');
+            });
+        }
     </script>
 </body>
 </html>

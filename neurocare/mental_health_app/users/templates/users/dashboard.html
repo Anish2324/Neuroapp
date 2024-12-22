@@ -3,25 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Dashboard</title>
+  <title>Responsive Dashboard with Theme Toggle</title>
 
   {% load static %}
   <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
   <style>
-    /* Basic Reset */
+    :root {
+      --bg-color: #fff;
+      --text-color: #000;
+      --navbar-color: #333;
+      --navbar-text-color: #fff;
+      --row-box-bg: #f1f1f1;
+      --row-box-border: #ccc;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     h2 {
-        margin-left: 15px;
+      margin-left: 15px;
     }
 
-    /* Navbar Styles */
     .navbar {
-      background-color: #333;
-      color: white;
+      background-color: var(--navbar-color);
+      color: var(--navbar-text-color);
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
@@ -39,77 +49,7 @@
       font-weight: bold;
     }
 
-    /* Mobile Menu Button */
-    .mobile-menu-btn {
-      background: none;
-      border: none;
-      color: gray;
-      padding: 8px;
-      cursor: pointer;
-      display: none;
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
-
-    /* Notification and Profile Buttons */
-    .notification-btn, .profile-btn {
-      background: none;
-      border: none;
-      color: gray;
-      padding: 8px;
-      cursor: pointer;
-    }
-
-    .notification-icon, .profile-pic {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-    }
-
-    /* Sidebar Styles */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: #333;
-      color: white;
-      transition: transform 0.3s ease;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-      overflow-y: auto;
-    }
-
-    .sidebar.open {
-      transform: translateX(250px);
-    }
-
-    .sidebar .logo1 {
-      margin-top: 40px;
-      padding: 15px 20px;
-      background-color: #333;
-    }
-
-    .sidebar a {
-      display: block;
-      padding: 15px 20px;
-      color: white;
-      border-bottom: 1px solid #444;
-      cursor: pointer;
-    }
-
-    .sidebar a:hover {
-      background-color: #444;
-    }
-
-    /* Toggle Button */
     .toggle-btn {
-      position: fixed;
-      top: 10px;
-      left: 10px;
       background-color: #007bff;
       color: white;
       border: none;
@@ -123,7 +63,41 @@
       background-color: #0056b3;
     }
 
-    /* Main Content Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: var(--navbar-color);
+      color: var(--navbar-text-color);
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+    }
+
+    .sidebar.open {
+      transform: translateX(250px);
+    }
+
+    .sidebar .logo1 {
+      margin-top: 40px;
+      padding: 15px 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #444;
+    }
+
     .content {
       padding: 20px;
       margin-left: 0;
@@ -134,7 +108,6 @@
       margin-left: 250px;
     }
 
-    /* Dashboard Layout */
     .dashboard {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -143,11 +116,11 @@
 
     .dashboard .row-box {
       height: 150px;
-      background-color: #f1f1f1;
+      background-color: var(--row-box-bg);
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #ccc;
+      border: 1px solid var(--row-box-border);
       border-radius: 10px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
@@ -155,80 +128,16 @@
     }
 
     .dashboard .row-box:hover {
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-   
-    
-
-    .dashboard .row-box:hover {
-      font-size: 150%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .dashboard .row-box1{
-      height: 150px;
-      background-color: #f1f1f1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      cursor: pointer;
-    }
-
-   
-
-   
-    .dashboard .row-box1:hover {
-      font-size: 150%;
-    }
-
-    /* Mobile Menu Styles */
-    .mobile-menu {
-      display: none;
-      background-color: #333;
-      padding: 10px 0;
-    }
-
-    .mobile-menu .menu-item {
-      padding: 10px 20px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .mobile-menu .menu-item:hover {
-      background-color: #444;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .navbar-content {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .navbar-right {
-        display: none;
-      }
-
-      .navbar-center {
-        display: none;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-
-      .dashboard {
-        grid-template-columns: 1fr;
-      }
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --navbar-color: #222;
+      --navbar-text-color: #e0e0e0;
+      --row-box-bg: #333;
+      --row-box-border: #555;
     }
   </style>
 </head>
@@ -244,15 +153,7 @@
     </div>
 
     <div class="navbar-right">
-      <button class="notification-btn">
-        <svg class="icon notification-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-        </svg>
-      </button>
-
-      <button class="profile-btn">
-        <img class="profile-pic" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Profile">
-      </button>
+      <button id="theme-toggle" class="toggle-btn">Dark Mode</button>
     </div>
   </nav>
 
@@ -264,11 +165,7 @@
     <h2 class="appname">NeuroCare+</h2>
     <ul>
       <li><a href="#">Dashboard</a></li>
-      <li><a href="/game1">
-        <img src="{% static '/users/images/game1.png' %}" alt="Game 1" class="icon" />
-      </a></li>
-
-
+      <li><a href="/game1"><span>Game 1</span></a></li>
       <li><a href="/game2"><span>Game 2</span></a></li>
       <li><a href="#">Users</a></li>
       <li><a href="/logout/">Logout</a></li>
@@ -279,32 +176,26 @@
   <div id="content" class="content">
     <h1>Dashboard</h1>
     <div class="dashboard">
-      <!-- Stress Level Box -->
       <div class="row-box" style="background-color: aqua;">
-        
         <p>Stress Level: <strong>{{ Profile.stress_level }}</strong></p>
-        
       </div>
-      
-      <!-- Anxiety Level Box -->
+
       <div class="row-box" style="background-color: rgb(185, 93, 47);">
         <p>Anxiety Level: <strong>{{ Profile.anxiety_level }}</strong></p>
-         </div>
-      
-      <!-- Depression Level Box -->
+      </div>
+
       <div class="row-box" style="background-color: yellow;">
         <p>Depression Level: <strong>{{ Profile.depression_level }}</strong></p>
-         </div>
+      </div>
 
-      <!-- Coins Level Box -->
       <div class="row-box">
         <p>Coins: <strong>{{ Profile.coins }}</strong></p>
-         </div>
-      
+      </div>
+
       <div class="row-box">LeaderBoard/Quiz</div>
-      <div class="row-box">Performance</div>   
-      <div class="row-box1"><a href="/game1"> Game1</a></div>
-      <div class="row-box1"><a href="/game2"> Game2</a></div>
+      <div class="row-box">Performance</div>
+      <div class="row-box"><a href="/game1"> Connecting Colors Game</a></div>
+      <div class="row-box"><a href="/game2"> Maze Game</a></div>
     </div>
   </div>
 
@@ -317,6 +208,24 @@
     toggleBtn.addEventListener('click', () => {
       sidebar.classList.toggle('open');
       content.classList.toggle('shift');
+    });
+
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.classList.add(savedTheme);
+      themeToggle.textContent = savedTheme === 'dark-mode' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const currentTheme = body.classList.contains('dark-mode') ? 'dark-mode' : '';
+      localStorage.setItem('theme', currentTheme);
+      themeToggle.textContent = currentTheme === 'dark-mode' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
     });
   </script>
 </body>
