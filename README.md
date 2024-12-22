@@ -7,8 +7,8 @@ This repository contains the source code and documentation for our web-based pla
 - [Business Strategies]
 - [Future Updates]
 - [Extra Points]
-- [Setup and Installation]
-- [License]
+- [Prerequisites:]
+
 
 ---
 Introduction
@@ -98,7 +98,7 @@ User Flow:
 
 ---
 
-  Setup and Installation
+  
 
   Prerequisites:
 - Django
