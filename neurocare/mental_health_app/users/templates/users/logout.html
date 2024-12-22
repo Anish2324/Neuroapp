@@ -4,11 +4,68 @@
 <head>
     <title>NeuroCare+ - Logout</title>
     {% load static %}
-  <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
+    <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        a {
+            text-decoration: none;
+            color: #1E90FF;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #FF4500;
+        }
+        .countdown {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #FF6347;
+        }
+        .feedback {
+            margin-top: 30px;
+        }
+    </style>
+    <script>
+        // Countdown Timer
+        let countdown = 10;
+        function startCountdown() {
+            const timer = document.getElementById('timer');
+            const interval = setInterval(() => {
+                countdown--;
+                timer.textContent = countdown;
+                if (countdown === 0) {
+                    clearInterval(interval);
+                    window.location.href = "/login/";
+                }
+            }, 1000);
+        }
+
+        // Run countdown on page load
+        window.onload = startCountdown;
+    </script>
 </head>
 <body>
     <h1>You have been logged out</h1>
     <p>Thank you for using NeuroCare+. See you soon!</p>
+    <div class="countdown">
+        Redirecting to login page in <span id="timer">10</span> seconds...
+    </div>
     <a href="/login/">Login Again</a>
+
+    <div class="feedback">
+        <h3>We value your feedback</h3>
+        <form action="/submit-feedback/" method="POST">
+            {% csrf_token %}
+            <textarea name="feedback" rows="4" cols="50" placeholder="Let us know your thoughts..."></textarea><br>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
 </body>
 </html>
