@@ -1,0 +1,27 @@
+<!-- Dashboard Template -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NeuroCare+ - Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <!-- <p>Coins: 25</p> -->
+    <p>Coins: {{ Profile.coins }}</p>
+    <p>Your mental health metrics:</p>
+    <ul>
+        <!-- <li>Stress Level: Low</li>
+        <li>Anxiety Level: high</li>
+        <li>Depression Level:can't say</li> -->
+        <li>Stress Level: {{ Profile.stress_level }}</li>
+        <li>Anxiety Level: {{ Profile.anxiety_level }}</li>
+        <li>Depression Level: {{ Profile.depression_level }}</li>
+    </ul>
+    <h2>Games to Improve Mental Health</h2>
+    <ul>
+        <li><a href="/game1">Game 1</a></li>
+        <li><a href="/game2">Game 2</a></li>
+    </ul>
+    <a href="/logout/">Logout</a>
+</body>
+</html>
