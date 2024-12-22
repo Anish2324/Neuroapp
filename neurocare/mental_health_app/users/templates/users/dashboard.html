@@ -6,6 +6,7 @@
   <title>Responsive Dashboard</title>
 
   {% load static %}
+  <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
   <style>
     /* Basic Reset */
     body {
@@ -154,20 +155,35 @@
     }
 
     .dashboard .row-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
    
     
 
     .dashboard .row-box:hover {
-      display: block;
+      font-size: 150%;
     }
 
-    /* Full Width Box */
-    .dashboard .full-width {
-      grid-column: 1 / -1;
+    .dashboard .row-box1{
+      height: 150px;
+      background-color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+   
+
+   
+    .dashboard .row-box1:hover {
+      font-size: 150%;
     }
 
     /* Mobile Menu Styles */
@@ -248,8 +264,12 @@
     <h2 class="appname">NeuroCare+</h2>
     <ul>
       <li><a href="#">Dashboard</a></li>
-      <li><a href="/game1">Game 1</a></li>
-      <li><a href="/game2">Game 2</a></li>
+      <li><a href="/game1">
+        <img src="{% static '/users/images/game1.png' %}" alt="Game 1" class="icon" />
+      </a></li>
+
+
+      <li><a href="/game2"><span>Game 2</span></a></li>
       <li><a href="#">Users</a></li>
       <li><a href="/logout/">Logout</a></li>
     </ul>
@@ -261,6 +281,7 @@
     <div class="dashboard">
       <!-- Stress Level Box -->
       <div class="row-box" style="background-color: aqua;">
+        
         <p>Stress Level: <strong>{{ Profile.stress_level }}</strong></p>
         
       </div>
@@ -282,8 +303,8 @@
       
       <div class="row-box">LeaderBoard/Quiz</div>
       <div class="row-box">Performance</div>   
-      <div class="row-box full-width">Game1</div>
-      <div class="row-box full-width">Game2</div>
+      <div class="row-box1"><a href="/game1"> Game1</a></div>
+      <div class="row-box1"><a href="/game2"> Game2</a></div>
     </div>
   </div>
 

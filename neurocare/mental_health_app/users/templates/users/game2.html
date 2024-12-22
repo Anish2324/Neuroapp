@@ -2,15 +2,157 @@
 <html>
 <head>
     <title>NeuroCare+ - Add Coins</title>
+  
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static '/users/images/finallogo.ico' %}">
+    <style>
+        /* Basic Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            overflow: hidden; /* Hide falling coins beyond the viewport */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Ensure full-height layout */
+            text-align: center;
+        }
+        h1 {
+            margin: 10px 0;
+            font-size: 2em;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        form {
+            margin: 15px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color:#fff;
+        }
+        a {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a .play {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color:  white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Falling Coins Animation */
+        .coin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: -50px; /* Start above the top of the viewport */
+            background-image: url("{% static '/users/images/coin.png' %}");
+            background-size: cover;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(0) rotate(0deg); /* Start from the top */
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg); /* Fall to the bottom */
+            }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.5em;
+            }
+            button {
+                font-size: 1.2em;
+                padding: 12px 25px;
+            }
+            .coin {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            h1 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1.8em;
+            }
+            button {
+                font-size: 1.5em;
+                padding: 15px 30px;
+            }
+            .coin {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Earn Coins</h1>
     <p>Current Coins: {{ profile.coins }}</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Get Coins</button>
+        <h2>Click to Play the Game</h2>
+        <button type="submit">
+             <a href="" target="_blank" class="play">Play the Game</a>
+        </button>
     </form>
     <br>
     <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+    <!-- Falling Coins Script -->
+    <script>
+        // Generate falling coins
+        const body = document.body;
+
+        function createCoin() {
+            const coin = document.createElement('div');
+            coin.className = 'coin';
+            coin.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+            coin.style.animationDuration = Math.random() * 5 + 5 + 's'; // Slow fall duration between 5s and 10s
+            body.appendChild(coin);
+
+            // Remove coin after animation ends
+            coin.addEventListener('animationend', () => {
+                coin.remove();
+            });
+        }
+
+        // Create coins at regular intervals
+        setInterval(createCoin, 500); // Create a new coin every 500ms
+    </script>
 </body>
 </html>

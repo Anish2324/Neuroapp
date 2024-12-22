@@ -85,7 +85,7 @@ def game1_view(request):
     
     if request.method == "POST":
         # Add 10 coins each time the button is pressed
-        profile.coins += 10
+        profile.coins=profile.coins + 10
         profile.save()
     
     return render(request, "users/game1.html", {"profile": profile})
@@ -95,7 +95,7 @@ def game2_view(request):
     
     if request.method == "POST":
         # Add 10 coins each time the button is pressed
-        profile.coins -= 10
+        profile.coins += 10
         profile.save()
     
     return render(request, "users/game2.html", {"profile": profile})
