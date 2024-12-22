@@ -7,7 +7,7 @@ This repository contains the source code and documentation for our web-based pla
 - [Business Strategies]
 - [Future Updates]
 - [Extra Points]
-- [Prerequisites:]
+- [Prerequisites]
 
 
 ---
