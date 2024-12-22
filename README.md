@@ -8,7 +8,7 @@ This repository contains the source code and documentation for our web-based pla
 - [Future Updates]
 - [Extra Points]
 - [Prerequisites]
-- -[Team Roles]
+- [Team Roles]
 
 
 ---
