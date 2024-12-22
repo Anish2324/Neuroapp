@@ -8,6 +8,7 @@ This repository contains the source code and documentation for our web-based pla
 - [Future Updates]
 - [Extra Points]
 - [Prerequisites]
+- -[Team Roles]
 
 
 ---
@@ -103,5 +104,11 @@ User Flow:
   Prerequisites:
 - Django
 - [Git](https://git-scm.com)
+
+  Team Roles:
+ Anish D Tabib -> FrontEnd(HTML,CSS,Javascript,Tailwind CSS)
+ Bayya Venkata Anvesh -> Backend (Django, SQLite) & Video Editing
+ Karthik S Poojary -> Powerpoint Presentation, Frontend.
+ Charan Kumar ->  Powerpoint Presentation, Backend.
 
 
